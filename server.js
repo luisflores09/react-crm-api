@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const contactsController = require('./controllers/contacts');
 
 const app = express();
 
@@ -29,10 +30,14 @@ app.get('/api', (req, res) => {
     })
 });
 
+app.use('/api/contacts', contactsController);
+
+
 app.get('/api/*', (req, res) => {
     res.status(404).json({
         message: 'That route was not found'
     })
 });
+
 
 app.listen(PORT, () => console.log(`Express is listening on port: ${PORT}`));
